@@ -1,4 +1,6 @@
+import AiringTodayTvSection from '../sections/AiringTodayTvSection'
 import CarouselSection from '../sections/CarouselSection'
+import NowPlayingMoviesSection from '../sections/NowPlayingMoviesSection'
 import PopularSection from '../sections/PopularSection'
 import TrendingSection from '../sections/TrendingSection'
 
@@ -11,6 +13,8 @@ const Home = () => {
       <main className='py-5'>
         <CarouselSection />
         <TrendingSection />
+        <NowPlayingMoviesSection />
+        <AiringTodayTvSection />
         <PopularSection />
       </main>
     </>

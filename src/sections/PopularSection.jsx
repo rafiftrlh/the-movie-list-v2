@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import CardPopular from '../components/CardPopular'
-import { useGetPopular } from '../hooks/useGetMovie'
+import { useGetPopular } from '../hooks/useGetMovieAndTv'
 import { Link } from 'react-router-dom'
 
 const PopularSection = () => {

@@ -1,7 +1,6 @@
 import { imageUrl } from '../services/api'
 
 const CardPopular = ({ data }) => {
-  console.log(data)
   const formattedVote = data.vote_average.toFixed(1) // Membatasi nilai vote_average menjadi 1 angka desimal
 
   // Menentukan warna border berdasarkan nilai vote_average

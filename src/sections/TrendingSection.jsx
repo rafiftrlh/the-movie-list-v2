@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { useGetTrendingWeek } from '../hooks/useGetMovie'
-import CardTrending from '../components/CardTrending'
+import { useGetTrendingWeek } from '../hooks/useGetMovieAndTv'
+import CardSimple from '../components/CardSimple'
 
 const TrendingSection = () => {
   const [type, setType] = useState('movie')
@@ -12,7 +12,7 @@ const TrendingSection = () => {
 
   return (
     <>
-      {/* Trending Today */}
+      {/* Trending Week */}
       <div className='w-full'>
         <div className='flex flex-col md:flex-row items-start md:items-center gap-3 mx-10'>
           <h1 className='font-bold tracking-wide text-xl'>| Trending Week</h1>
@@ -53,7 +53,7 @@ const TrendingSection = () => {
         <div className='overflow-y-hidden mt-3 w-full relative'>
           <div className='flex overflow-x-auto gap-5 py-3 px-10'>
             {dataTrendingWeek?.results?.map((data, index) => (
-              <CardTrending key={index} data={data} />
+              <CardSimple key={index} data={data} />
             ))}
           </div>
         </div>

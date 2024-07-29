@@ -1,4 +1,4 @@
-import { useGetTrendingToday } from '../hooks/useGetMovie'
+import { useGetTrendingToday } from '../hooks/useGetMovieAndTv'
 import { useEffect, useState } from 'react'
 import { imageUrl } from '../services/api'
 
