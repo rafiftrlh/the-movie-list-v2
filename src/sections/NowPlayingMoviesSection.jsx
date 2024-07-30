@@ -9,7 +9,7 @@ const NowPlayingMoviesSection = () => {
       <div className='w-full mt-5'>
         <div className='flex flex-col md:flex-row items-start md:items-center gap-3 mx-10'>
           <h1 className='font-bold tracking-wide text-xl'>
-            | Now Playing Movies
+            | Movies Now Playing
           </h1>
         </div>
 

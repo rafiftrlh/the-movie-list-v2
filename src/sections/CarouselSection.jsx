@@ -1,21 +1,22 @@
-import { useGetTrendingToday } from '../hooks/useGetMovieAndTv'
+import { useGetCarouselData } from '../hooks/useGetMovieAndTv'
 import { useEffect, useState } from 'react'
 import { imageUrl } from '../services/api'
 
 const CarouselSection = () => {
-  const { dataTrending } = useGetTrendingToday()
+  const { dataCarousel } = useGetCarouselData()
   const [currentIndex, setCurrentIndex] = useState(0)
+  console.log(dataCarousel)
 
   const prev = () => {
     const isFirstCurrentIndex = currentIndex === 0
     const newCurrentIndex = isFirstCurrentIndex
-      ? dataTrending.length - 1
+      ? dataCarousel.length - 1
       : currentIndex - 1
     setCurrentIndex(newCurrentIndex)
   }
 
   const next = () => {
-    const isLastCurrentIndex = currentIndex === dataTrending.length - 1
+    const isLastCurrentIndex = currentIndex === dataCarousel.length - 1
     const newCurrentIndex = isLastCurrentIndex ? 0 : currentIndex + 1
     setCurrentIndex(newCurrentIndex)
   }
@@ -30,7 +31,7 @@ const CarouselSection = () => {
     }, 5000)
 
     return () => clearInterval(interval)
-  }, [currentIndex, dataTrending.length])
+  }, [currentIndex, dataCarousel.length])
 
   return (
     <div className='relative w-full max-w-[1400px] mx-auto p-5'>
@@ -39,7 +40,7 @@ const CarouselSection = () => {
           className='flex transition-transform duration-700 ease-in-out'
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
-          {dataTrending.map((data, index) => (
+          {dataCarousel.map((data, index) => (
             <div key={index} className='w-full flex-shrink-0 relative'>
               <img
                 src={imageUrl + data.backdrop_path}
@@ -52,7 +53,7 @@ const CarouselSection = () => {
                 </h2>
                 <div className='flex flex-wrap items-center justify-end gap-5'>
                   <span className='bg-gray-900 w-fit px-2 py-1 text-sm font-medium text-emerald-400 rounded-lg border-2 border-dark-steel-blue'>
-                    Trending Today
+                    Top Rating
                   </span>
                   <span className='bg-gray-900 w-fit px-2 py-1 text-sm font-medium text-emerald-400 fill-emerald-400 rounded-lg border-2 border-dark-steel-blue flex items-center gap-1 uppercase'>
                     <svg
@@ -81,11 +82,11 @@ const CarouselSection = () => {
                     >
                       <path
                         fill='#ff8800'
-                        d='M17.66 11.2c-.23-.3-.51-.56-.77-.82c-.67-.6-1.43-1.03-2.07-1.66C13.33 7.26 13 4.85 13.95 3c-.95.23-1.78.75-2.49 1.32c-2.59 2.08-3.61 5.75-2.39 8.9c.04.1.08.2.08.33c0 .22-.15.42-.35.5c-.23.1-.47.04-.66-.12a.6.6 0 0 1-.14-.17c-1.13-1.43-1.31-3.48-.55-5.12C5.78 10 4.87 12.3 5 14.47c.06.5.12 1 .29 1.5c.14.6.41 1.2.71 1.73c1.08 1.73 2.95 2.97 4.96 3.22c2.14.27 4.43-.12 6.07-1.6c1.83-1.66 2.47-4.32 1.53-6.6l-.13-.26c-.21-.46-.77-1.26-.77-1.26m-3.16 6.3c-.28.24-.74.5-1.1.6c-1.12.4-2.24-.16-2.9-.82c1.19-.28 1.9-1.16 2.11-2.05c.17-.8-.15-1.46-.28-2.23c-.12-.74-.1-1.37.17-2.06c.19.38.39.76.63 1.06c.77 1 1.98 1.44 2.24 2.8c.04.14.06.28.06.43c.03.82-.33 1.72-.93 2.27'
+                        d='M12.865 2.996a1 1 0 0 0-1.73 0L8.421 7.674a1.25 1.25 0 0 1-.894.608L2.44 9.05c-.854.13-1.154 1.208-.488 1.76l3.789 3.138c.35.291.515.75.43 1.197L5.18 20.35a1 1 0 0 0 1.448 1.072l4.79-2.522a1.25 1.25 0 0 1 1.164 0l4.79 2.522a1 1 0 0 0 1.448-1.072l-.991-5.205a1.25 1.25 0 0 1 .43-1.197l3.79-3.139c.665-.55.365-1.63-.49-1.759l-5.085-.768a1.25 1.25 0 0 1-.895-.608z'
                       ></path>
                     </svg>
                     <span className='font-medium text-sm'>
-                      {data.popularity}
+                      {data.vote_average}
                     </span>
                   </div>
                 </div>
@@ -95,7 +96,7 @@ const CarouselSection = () => {
         </div>
 
         <div className='absolute top-10 md:bottom-10 md:top-auto left-10 transform flex space-x-2'>
-          {dataTrending.map((_, index) => (
+          {dataCarousel.map((_, index) => (
             <button
               key={index}
               className={`w-2 h-2 rounded-full transition duration-500 ${

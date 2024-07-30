@@ -35,44 +35,52 @@ const useGetTrendingWeek = type => {
   return { dataTrendingWeek }
 }
 
-const useGetTrendingToday = () => {
-  const [dataTrending, setDataTrending] = useState([])
+const useGetCarouselData = () => {
+  const [dataCarousel, setDataCarousel] = useState([])
 
   useEffect(() => {
-    const fetchTrendingMovies = async () => {
+    const fetchCarouselMovies = async () => {
       try {
-        const res = await apiAxios.get(`/trending/movie/day`)
-        return res.data.results.slice(0, 5)
+        const res = await apiAxios.get(`/movie/top_rated?page=1`)
+        return res.data.results.slice(0, 5).map(movie => ({
+          ...movie,
+          media_type: 'movie',
+          vote_average: parseFloat(movie.vote_average.toFixed(1))
+        }))
       } catch (err) {
         console.log(err)
         return []
       }
     }
 
-    const fetchTrendingTV = async () => {
+    const fetchCarouselTV = async () => {
       try {
-        const res = await apiAxios.get(`/trending/tv/day`)
-        return res.data.results.slice(0, 5)
+        const res = await apiAxios.get(`/tv/top_rated?page=1`)
+        return res.data.results.slice(0, 5).map(tv => ({
+          ...tv,
+          media_type: 'tv',
+          vote_average: parseFloat(tv.vote_average.toFixed(1))
+        }))
       } catch (err) {
         console.log(err)
         return []
       }
     }
 
-    const fetchAllTrending = async () => {
-      const [trendingMovies, trendingTV] = await Promise.all([
-        fetchTrendingMovies(),
-        fetchTrendingTV()
+    const fetchAllCarousel = async () => {
+      const [carouselMovies, carouselTV] = await Promise.all([
+        fetchCarouselMovies(),
+        fetchCarouselTV()
       ])
 
-      const combinedData = [...trendingMovies, ...trendingTV]
-      setDataTrending(combinedData)
+      const combinedData = [...carouselMovies, ...carouselTV]
+      setDataCarousel(combinedData)
     }
 
-    fetchAllTrending()
+    fetchAllCarousel()
   }, [])
 
-  return { dataTrending }
+  return { dataCarousel }
 }
 
-export { useGetPopular, useGetTrendingWeek, useGetTrendingToday }
+export { useGetPopular, useGetTrendingWeek, useGetCarouselData }
