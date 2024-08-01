@@ -12,7 +12,8 @@ const CardPopular = ({ data }) => {
   }
 
   return (
-    <div className='overflow-hidden group w-full flex-shrink-0 relative hover:scale-105 transition-transform'>
+    <div className='overflow-hidden group w-full flex-shrink-0 relative hover:scale-105 transition-transform
+    '>
       <div className='w-full'>
         <div className='w-full flex-shrink-0 overflow-hidden rounded-lg'>
           <img

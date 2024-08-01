@@ -3,7 +3,6 @@ import CardSimple from '../components/CardSimple'
 
 const AiringTodayTvSection = () => {
   const { dataAiringToday } = useGetAiringToday()
-  console.log(dataAiringToday)
 
   return (
     <>

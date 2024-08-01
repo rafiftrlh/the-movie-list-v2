@@ -5,7 +5,6 @@ import { imageUrl } from '../services/api'
 const CarouselSection = () => {
   const { dataCarousel } = useGetCarouselData()
   const [currentIndex, setCurrentIndex] = useState(0)
-  console.log(dataCarousel)
 
   const prev = () => {
     const isFirstCurrentIndex = currentIndex === 0
@@ -34,7 +33,7 @@ const CarouselSection = () => {
   }, [currentIndex, dataCarousel.length])
 
   return (
-    <div className='relative w-full max-w-[1400px] mx-auto p-5'>
+    <div className='relative w-full max-w-[1400px] mx-auto px-10'>
       <div className='relative h-full overflow-hidden rounded-lg shadow-lg'>
         <div
           className='flex transition-transform duration-700 ease-in-out'

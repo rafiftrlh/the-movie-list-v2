@@ -11,6 +11,9 @@ export default {
       },
       colors: {
         "dark-steel-blue": "#13395c"
+      },
+      aspectRatio: {
+        poster: "2 / 3"
       }
     },
   },

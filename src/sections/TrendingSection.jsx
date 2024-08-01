@@ -13,7 +13,7 @@ const TrendingSection = () => {
   return (
     <>
       {/* Trending Week */}
-      <div className='w-full'>
+      <div className='w-full mt-5'>
         <div className='flex flex-col md:flex-row items-start md:items-center gap-3 mx-10'>
           <h1 className='font-bold tracking-wide text-xl'>| Trending Week</h1>
           {/* Toggle Switch */}

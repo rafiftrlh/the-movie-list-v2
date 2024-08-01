@@ -1,6 +1,37 @@
 import { useEffect, useState } from 'react'
 import apiAxios from '../services/api'
 
+const useGetCollection = searchVal => {
+  const [dataCollections, setDataCollections] = useState([])
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (searchVal) {
+        setLoading(true)
+        try {
+          const res = await apiAxios.get(
+            `/search/collection?query=${searchVal}&include_adult=false&language=en-US&page=1`
+          )
+          setDataCollections(res.data.results)
+        } catch (err) {
+          console.log(err)
+        } finally {
+          setLoading(false)
+        }
+      } else {
+        setDataCollections([])
+      }
+    }
+
+    const debounceFetch = setTimeout(fetchData, 300)
+
+    return () => clearTimeout(debounceFetch)
+  }, [searchVal])
+
+  return { dataCollections, loading }
+}
+
 const useGetPopular = type => {
   const [dataPopular, setDataPopular] = useState([])
 
@@ -83,4 +114,9 @@ const useGetCarouselData = () => {
   return { dataCarousel }
 }
 
-export { useGetPopular, useGetTrendingWeek, useGetCarouselData }
+export {
+  useGetPopular,
+  useGetTrendingWeek,
+  useGetCarouselData,
+  useGetCollection
+}
