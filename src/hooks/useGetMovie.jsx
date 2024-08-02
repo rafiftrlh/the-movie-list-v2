@@ -1,20 +1,23 @@
+import { useState, useEffect, useMemo } from 'react'
 import apiAxios from '../services/api'
-import { useState, useEffect } from 'react'
 
 const useGetMovies = () => {
   const [dataMovies, setDataMovies] = useState([])
+
   useEffect(() => {
     apiAxios
       .get(`/discover/movie?sort_by=popularity.desc`)
       .then(ress => {
-        setDataMovies(ress.data)
+        setDataMovies(ress.data.results)
       })
       .catch(err => {
         console.log(err)
       })
   }, [])
 
-  return { dataMovies }
+  const memoizedDataMovies = useMemo(() => dataMovies, [dataMovies])
+
+  return { dataMovies: memoizedDataMovies }
 }
 
 const useGetNowPlayingMovies = () => {
@@ -23,11 +26,16 @@ const useGetNowPlayingMovies = () => {
   useEffect(() => {
     apiAxios
       .get(`/movie/now_playing`)
-      .then(ress => setDataNowPlayingMovies(ress.data))
+      .then(ress => setDataNowPlayingMovies(ress.data.results))
       .catch(err => console.log(err))
   }, [])
 
-  return { dataNowPlayingMovies }
+  const memoizedDataNowPlayingMovies = useMemo(
+    () => dataNowPlayingMovies,
+    [dataNowPlayingMovies]
+  )
+
+  return { dataNowPlayingMovies: memoizedDataNowPlayingMovies }
 }
 
 export { useGetMovies, useGetNowPlayingMovies }

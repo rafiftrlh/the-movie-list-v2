@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import apiAxios from '../services/api'
 
 const useGetAiringToday = () => {
@@ -8,12 +8,17 @@ const useGetAiringToday = () => {
     apiAxios
       .get(`/tv/airing_today`)
       .then(ress => {
-        setDataAiringToday(ress.data)
+        setDataAiringToday(ress.data.results)
       })
       .catch(err => console.log(err))
   }, [])
 
-  return { dataAiringToday }
+  const memoizedDataAiringToday = useMemo(
+    () => dataAiringToday,
+    [dataAiringToday]
+  )
+
+  return { dataAiringToday: memoizedDataAiringToday }
 }
 
 const useGetOnTheAir = () => {
@@ -23,12 +28,14 @@ const useGetOnTheAir = () => {
     apiAxios
       .get(`/tv/on_the_air`)
       .then(ress => {
-        setDataOnTheAir(ress.data)
+        setDataOnTheAir(ress.data.results)
       })
       .catch(err => console.log(err))
   }, [])
 
-  return { dataOnTheAir }
+  const memoizedDataOnTheAir = useMemo(() => dataOnTheAir, [dataOnTheAir])
+
+  return { dataOnTheAir: memoizedDataOnTheAir }
 }
 
 export { useGetAiringToday, useGetOnTheAir }

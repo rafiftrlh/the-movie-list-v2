@@ -61,7 +61,7 @@ const PopularSection = () => {
           </div>
 
           <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-3 w-full py-3 px-10'>
-            {dataPopular?.results?.map((data, index) => (
+            {dataPopular?.map((data, index) => (
               <CardPopular key={index} data={data} />
             ))}
           </div>

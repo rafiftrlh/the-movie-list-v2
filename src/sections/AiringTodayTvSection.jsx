@@ -15,7 +15,7 @@ const AiringTodayTvSection = () => {
 
         <div className='overflow-y-hidden mt-3 w-full relative'>
           <div className='flex overflow-x-auto gap-5 py-3 px-10'>
-            {dataAiringToday?.results?.map((data, index) => (
+            {dataAiringToday?.map((data, index) => (
               <CardSimple key={index} data={data} />
             ))}
           </div>

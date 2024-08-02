@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import apiAxios from '../services/api'
 
 const useGetCollection = searchVal => {
@@ -29,7 +29,12 @@ const useGetCollection = searchVal => {
     return () => clearTimeout(debounceFetch)
   }, [searchVal])
 
-  return { dataCollections, loading }
+  const memoizedDataCollections = useMemo(
+    () => dataCollections,
+    [dataCollections]
+  )
+
+  return { dataCollections: memoizedDataCollections, loading }
 }
 
 const useGetPopular = type => {
@@ -39,14 +44,16 @@ const useGetPopular = type => {
     apiAxios
       .get(`/${type}/popular?page=1`)
       .then(res => {
-        setDataPopular(res.data)
+        setDataPopular(res.data.results)
       })
       .catch(err => {
         console.log(err)
       })
   }, [type])
 
-  return { dataPopular }
+  const memoizedDataPopular = useMemo(() => dataPopular, [dataPopular])
+
+  return { dataPopular: memoizedDataPopular }
 }
 
 const useGetTrendingWeek = type => {
@@ -56,14 +63,19 @@ const useGetTrendingWeek = type => {
     apiAxios
       .get(`/trending/${type}/week`)
       .then(res => {
-        setDataTrendingWeek(res.data)
+        setDataTrendingWeek(res.data.results)
       })
       .catch(err => {
         console.log(err)
       })
   }, [type])
 
-  return { dataTrendingWeek }
+  const memoizedDataTrendingWeek = useMemo(
+    () => dataTrendingWeek,
+    [dataTrendingWeek]
+  )
+
+  return { dataTrendingWeek: memoizedDataTrendingWeek }
 }
 
 const useGetCarouselData = () => {
@@ -111,7 +123,9 @@ const useGetCarouselData = () => {
     fetchAllCarousel()
   }, [])
 
-  return { dataCarousel }
+  const memoizedDataCarousel = useMemo(() => dataCarousel, [dataCarousel])
+
+  return { dataCarousel: memoizedDataCarousel }
 }
 
 export {

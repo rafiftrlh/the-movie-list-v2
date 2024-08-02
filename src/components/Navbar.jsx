@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useGetCollection } from '../hooks/useGetMovieAndTv'
 import { imageUrl } from '../services/api'
 
@@ -38,7 +38,6 @@ const ModalSearch = ({ setOpenModal }) => {
 
   const handleOnChange = value => {
     setQuery(value)
-    console.log(dataCollections)
   }
 
   return (
