@@ -1,9 +1,10 @@
+/* eslint-disable react/prop-types */
+import { Link } from 'react-router-dom'
 import { imageUrl } from '../services/api'
 
-const CardPopular = ({ data }) => {
-  const formattedVote = data.vote_average.toFixed(1) // Membatasi nilai vote_average menjadi 1 angka desimal
+const CardPopular = ({ data, type }) => {
+  const formattedVote = data.vote_average.toFixed(1)
 
-  // Menentukan warna border berdasarkan nilai vote_average
   let borderColor = 'border-red-500'
   if (data.vote_average >= 4 && data.vote_average < 7) {
     borderColor = 'border-yellow-500'
@@ -12,8 +13,11 @@ const CardPopular = ({ data }) => {
   }
 
   return (
-    <div className='overflow-hidden group w-full flex-shrink-0 relative hover:scale-105 transition-transform
-    '>
+    <Link
+      to={`/${type}/${data.id}`}
+      className='overflow-hidden group w-full flex-shrink-0 relative hover:scale-105 transition-transform
+    '
+    >
       <div className='w-full'>
         <div className='w-full flex-shrink-0 overflow-hidden rounded-lg'>
           <img
@@ -61,7 +65,7 @@ const CardPopular = ({ data }) => {
           </button>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
 

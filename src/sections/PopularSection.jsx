@@ -17,7 +17,7 @@ const PopularSection = () => {
         {/* Trending Today */}
         <div className='w-full'>
           <div className='flex flex-col md:flex-row justify-start md:justify-between items-start gap-3 mx-10'>
-            <div className='flex items-center gap-3'>
+            <div className='flex flex-col md:flex-row items-start md:items-center gap-3'>
               <h1 className='font-bold tracking-wide text-xl'>| Popular</h1>
               {/* Toggle Switch */}
               <div className='flex items-center cursor-pointer'>
@@ -62,7 +62,7 @@ const PopularSection = () => {
 
           <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-3 w-full py-3 px-10'>
             {dataPopular?.map((data, index) => (
-              <CardPopular key={index} data={data} />
+              <CardPopular type={type} key={index} data={data} />
             ))}
           </div>
         </div>

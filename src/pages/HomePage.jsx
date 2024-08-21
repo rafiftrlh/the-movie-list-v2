@@ -12,7 +12,7 @@ const Home = () => {
       <div className='fixed w-10 h-screen z-50 bg-gradient-to-r from-neutral-950 from-10% to-transparent'></div>
       <div className='fixed right-0 w-10 h-screen z-50 bg-gradient-to-l from-neutral-950 from-10% to-transparent'></div>
       <Navbar />
-      <main className='py-5 relative'>
+      <main className='pb-5 relative'>
         <CarouselSection />
         <TrendingSection />
         <NowPlayingMoviesSection />

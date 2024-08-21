@@ -38,4 +38,17 @@ const useGetNowPlayingMovies = () => {
   return { dataNowPlayingMovies: memoizedDataNowPlayingMovies }
 }
 
-export { useGetMovies, useGetNowPlayingMovies }
+const useGetDetailMovie = id => {
+  const [detailMovie, setDetailMovie] = useState([])
+
+  useEffect(() => {
+    apiAxios
+      .get(`/movie/${id}`)
+      .then(ress => setDetailMovie(ress.data))
+      .catch(err => console.log(err))
+  }, [id])
+
+  return { detailMovie }
+}
+
+export { useGetMovies, useGetNowPlayingMovies, useGetDetailMovie }

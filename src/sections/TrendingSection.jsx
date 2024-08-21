@@ -53,7 +53,7 @@ const TrendingSection = () => {
         <div className='overflow-y-hidden mt-3 w-full relative'>
           <div className='flex overflow-x-auto gap-5 py-3 px-10'>
             {dataTrendingWeek?.map((data, index) => (
-              <CardSimple key={index} data={data} />
+              <CardSimple key={index} data={data} type={type} />
             ))}
           </div>
         </div>

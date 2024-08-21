@@ -1,8 +1,13 @@
+/* eslint-disable react/prop-types */
+import { Link } from 'react-router-dom'
 import { imageUrl } from '../services/api'
 
-const CardTrending = ({ data }) => {
+const CardTrending = ({ type, data }) => {
   return (
-    <div className='overflow-hidden group w-48 flex-shrink-0 relative hover:scale-105 transition-transform cursor-pointer rounded-lg'>
+    <Link
+      to={`/${type}/${data.id}`}
+      className='overflow-hidden group w-48 flex-shrink-0 relative hover:scale-105 transition-transform cursor-pointer rounded-lg'
+    >
       <div className='w-full'>
         <span className='absolute top-0 left-0 py-1 pl-2 pr-3 bg-red-600 text-sm rounded-ee-lg flex items-center gap-1 w-fit'>
           <svg
@@ -29,7 +34,7 @@ const CardTrending = ({ data }) => {
           <p className='font-medium mt-2'>{data.title || data.name}</p>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
 

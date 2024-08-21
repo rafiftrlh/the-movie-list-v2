@@ -14,6 +14,9 @@ export default {
       },
       aspectRatio: {
         poster: "2 / 3"
+      },
+      screens: {
+        xs: '450px'
       }
     },
   },
